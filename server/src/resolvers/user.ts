@@ -87,8 +87,8 @@ export class UserResolver {
     try {
       await em.persistAndFlush(user);
     } catch (err) {
+      // || err.detail.includes("already exists")) {
       if (err.code === '23505') {
-        // || err.detail.includes("already exists")) {
         return {
           errors: [
             {
@@ -131,7 +131,7 @@ export class UserResolver {
       return {
         errors: [
           {
-            field: 'username',
+            field: 'password',
             message: 'incorrect password',
           },
         ],
