@@ -14,6 +14,7 @@ import cors from 'cors';
 import {createConnection} from 'typeorm';
 import {User} from './entities/User';
 import {Post} from './entities/Post';
+import path from 'path';
 
 const main = async () => {
   await createConnection({
@@ -23,8 +24,14 @@ const main = async () => {
     password: 'postgres',
     logging: true,
     synchronize: true,
+    migrations: [path.join(__dirname, './migration/*')],
     entities: [Post, User],
   });
+
+  // uncomment when you want to insert the db the mock data,
+  // you need to init const conn with creatConnection
+  // const conn = await createConnection...
+  // await conn.runMigrations();
 
   const app = express();
 
