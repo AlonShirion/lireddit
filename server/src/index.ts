@@ -15,6 +15,7 @@ import {createConnection} from 'typeorm';
 import {User} from './entities/User';
 import {Post} from './entities/Post';
 import path from 'path';
+import {Updoot} from './entities/Updoot';
 
 const main = async () => {
   await createConnection({
@@ -25,7 +26,7 @@ const main = async () => {
     logging: true,
     synchronize: true,
     migrations: [path.join(__dirname, './migration/*')],
-    entities: [Post, User],
+    entities: [Post, User, Updoot],
   });
 
   // uncomment when you want to insert the db the mock data,
