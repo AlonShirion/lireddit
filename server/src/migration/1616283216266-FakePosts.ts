@@ -1,8 +1,8 @@
 import {MigrationInterface, QueryRunner} from 'typeorm';
 
-export class FakePosts1616199515139 implements MigrationInterface {
-  public async up(_: QueryRunner): Promise<void> {
-    // await queryRunner.query(`
+export class FakePosts1616283216266 implements MigrationInterface {
+  public async up(_queryRunner: QueryRunner): Promise<void> {
+    // await _queryRunner.query(`
     //   insert into post (title, text, "creatorId", "createdAt") values ('Shopgirl', 'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.
     //
     //   Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.
