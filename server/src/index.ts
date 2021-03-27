@@ -21,19 +21,20 @@ import {createUserLoader} from './utils/createUserLoader';
 import {createUpdootLoader} from './utils/createUpdootLoader';
 
 const main = async () => {
-  await createConnection({
+  const conn = await createConnection({
     type: 'postgres',
     url: process.env.DATABASE_URL,
     logging: true,
-    synchronize: true,
-    migrations: [path.join(__dirname, './migration/*')],
+    // synchronize: true,
+    migrations: [path.join(__dirname, './migrations/*')],
     entities: [Post, User, Updoot],
   });
 
-  // uncomment when you want to insert the db the mock data,
-  // you need to init const conn with creatConnection
+  // Uncomment when you want to insert the db the mock data
+  // or simply run the migrations.
+  // You need to init const conn with creatConnection
   // const conn = await createConnection...
-  // await conn.runMigrations();
+  await conn.runMigrations();
 
   // Delete all posts
   // await Post.delete({});
@@ -43,6 +44,7 @@ const main = async () => {
   const RedisStore = connectRedis(session);
   const redis = new Redis(process.env.REDIS_URL);
 
+  app.set('proxy', 1);
   app.use(
     cors({
       origin: process.env.CORS_ORIGIN,
